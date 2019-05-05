@@ -1,38 +1,38 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const newService_1 = require("../services/newService");
+const newsService_1 = require("../services/newsService");
 const HttpStatus = require("http-status");
 const helper_1 = require("../infra/helper");
 class NewsController {
     get(req, res) {
-        newService_1.default.get()
+        newsService_1.default.get()
             .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, news))
-            .catch(error => console.error.bind(console, "Erro ao gerar get"));
+            .catch(error => console.error.bind(console, `Error ${error}`));
     }
     getById(req, res) {
         const _id = req.params.id;
-        newService_1.default.getById(_id)
+        newsService_1.default.getById(_id)
             .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, news))
-            .catch(error => console.error.bind(console, "Erro ao gerar get por id"));
+            .catch(error => console.error.bind(console, `Error ${error}`));
     }
     create(req, res) {
         let vm = req.body;
-        newService_1.default.create(vm)
-            .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, "Noticia Cadastrada com sucesso!"))
+        newsService_1.default.create(vm)
+            .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, "Noticia cadastrada com sucesso!"))
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
     update(req, res) {
         const _id = req.params.id;
-        let vm = req.body;
-        newService_1.default.update(_id, vm)
-            .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, `Noticia foi atualizada com sucesso!`))
-            .catch(error => console.error.bind(console, "Erro no update"));
+        let news = req.body;
+        newsService_1.default.update(_id, news)
+            .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, "Notícia foi atualiza com sucesso!"))
+            .catch(error => console.error.bind(console, `Error ${error}`));
     }
     delete(req, res) {
-        let _id = req.prams.id;
-        newService_1.default.delete(_id)
-            .then(news => helper_1.default.sendResponse(res, HttpStatus.OK, "Noticia deletada com sucesso"))
-            .catch(error => console.error.bind(console, "Erro ao deletar"));
+        const _id = req.params.id;
+        newsService_1.default.delete(_id)
+            .then(() => helper_1.default.sendResponse(res, HttpStatus.OK, "Noticia deletada com sucesso!"))
+            .catch(error => console.error.bind(console, `Error ${error}`));
     }
 }
 exports.default = new NewsController();

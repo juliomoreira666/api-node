@@ -9,7 +9,6 @@ const NewsSchema = new mongoose.Schema({
     img: { type: String },
     publishDate: { type: Date },
     link: { type: String },
-    active: { type: Boolean },
-    reg_time: { type: Date, default: Date.now }
+    active: { type: Boolean }
 });
 exports.default = NewsSchema;

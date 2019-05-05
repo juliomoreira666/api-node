@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const bodyParser = require("body-parser");
 const db_1 = require("./infra/db");
-const bodyparser = require("body-parser");
 const newsController_1 = require("./controller/newsController");
 class StartUp {
     constructor() {
@@ -13,16 +13,14 @@ class StartUp {
         this.routes();
     }
     middler() {
-        this.app.use(bodyparser.json());
-        this.app.use(bodyparser.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: false }));
     }
     routes() {
         this.app.route("/").get((req, res) => {
-            res.send({
-                versao: "0.0.1"
-            });
+            res.send({ versao: "0.0.1" });
         });
-        // Rotas
+        //new
         this.app.route("/api/v1/news").get(newsController_1.default.get);
         this.app.route("/api/v1/news/:id").get(newsController_1.default.getById);
         this.app.route("/api/v1/news").post(newsController_1.default.create);

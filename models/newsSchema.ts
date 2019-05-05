@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+
 const NewsSchema = new mongoose.Schema({
   hat: { type: String },
   title: { type: String },
@@ -7,8 +8,7 @@ const NewsSchema = new mongoose.Schema({
   img: { type: String },
   publishDate: { type: Date },
   link: { type: String },
-  active: { type: Boolean },
-  reg_time: { type: Date, default: Date.now }
+  active: { type: Boolean }
 });
 
 export default NewsSchema;
